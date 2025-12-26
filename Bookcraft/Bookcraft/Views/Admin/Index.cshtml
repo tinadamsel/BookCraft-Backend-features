@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "User Dashboard";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1> Welcome Admin! </h1>
+        <!-- <h1> Welcome! <small> Admin </small> </h1> -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active"> <small> Dashboard </small> </li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section dashboard mt-5">
+        <div class="row mx-auto">
+            <div class="pagetitle text-center">
+                <h1> Ready To Write?</h1>
+                <p class="text-secondary"> Let our AI help you craft the perfect book from start to finish</p>
+            </div>
+            <!-- Left side columns -->
+            <div class="col-lg-8 mx-auto">
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title"> <i class="bi bi-book px-1"></i>Create new book </h5>
+                                <p class="card-text text-white"> Start a fresh project with AI assistance</p>
+                                <div class="align-items-center">
+                                    <div class="p-1">
+                                        <a class="btn btn-block mx-auto w-100 card-button" href="newbook.html">
+                                            Start writing now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                    <!-- Start Card -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title"> <i class="bi bi-book px-1"></i>Design book cover </h5>
+                                <p class="card-text text-white pt-2 pb-3"> Create stunning book covers </p>
+                                <div class="align-items-center">
+                                    <div class="p-1">
+                                        <a class="btn btn-block mx-auto w-100 card-button" href="createbookCover.html"> Create a book cover </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+
+                <!-- Second row -->
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title"> <i class="bi bi-stars px-1"></i>AI Writing Tip </h5>
+                                <p class="card-text text-white">
+                                    "Start each chapter with a compelling hook to keep readers engaged. Try askin
+                                    a question or presenting a conflict right from the first sentence"
+                                </p>
+                                <div class="align-items-center">
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn card-button">Next <i class="bi bi-box-arrow-right px-1"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div><!-- End Left side columns -->
+
+        </div>
+    </section>
+
+</main><!-- End main -->

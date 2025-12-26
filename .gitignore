@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/BookCraft-Backend-features/v17
+/Bookcraft/.vs/Bookcraft
+/Bookcraft/Bookcraft/bin/Debug/net9.0
+/Bookcraft/Bookcraft/obj
+/Bookcraft/Core/bin/Debug/net9.0
+/Bookcraft/Core/obj
+/Bookcraft/Logic/bin/Debug/net9.0
+/Bookcraft/Logic/obj
+/.vs/VSWorkspaceState.json
