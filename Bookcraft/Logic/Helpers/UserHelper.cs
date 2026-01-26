@@ -200,5 +200,276 @@ namespace Logic.Helpers
 
             return false;
         }
+
+        // add for the Admin dashboard
+        public int GetTotalGenres()
+        {
+            return _context.BookGenres.Where(x => x.Id > 0 && x.IsActive).Count();
+        }
+
+        public bool CheckExistingGenreName(string name)
+        {
+            if (name != null)
+            {
+                var checkGenreName = _context.BookGenres.Where(x => x.Name == name && x.IsActive).FirstOrDefault();
+                if (checkGenreName != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool CreateGenre(string name)
+        {
+            if (name != null)
+            {
+                var bookGenre = new BookGenre()
+                {
+                    Name = name,
+                    DateCreated = DateTime.Now,
+                    IsActive = true,
+                };
+                _context.BookGenres.Add(bookGenre);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public List<BookGenreViewModel> GetGenre()
+        {
+            var genreViewModel = new List<BookGenreViewModel>();
+            genreViewModel = _context.BookGenres.Where(x => x.Id > 0 && x.IsActive)
+                .Select(x => new BookGenreViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    DateCreated = x.DateCreated,
+                }).ToList();
+            return genreViewModel;
+        }
+        public BookGenreViewModel GetGenreToEdit(int id)
+        {
+            var genreToEdit = _context.BookGenres.Where(a => a.Id == id && a.IsActive)
+                .Select(a => new BookGenreViewModel()
+                {
+                    Name = a.Name,
+                    Id = a.Id,
+                    DateCreated = a.DateCreated,
+                }).FirstOrDefault();
+            if (genreToEdit != null)
+            {
+                return genreToEdit;
+            }
+            return null;
+        }
+
+        public bool SaveEditedGenre(int id, string name)
+        {
+            if (id > 0 && name != null)
+            {
+                var editgenre = _context.BookGenres.Where(x => x.Id == id && x.IsActive).FirstOrDefault();
+                if (editgenre != null)
+                {
+                    editgenre.Name = name;
+                }
+                _context.Update(editgenre);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteGenre(int id)
+        {
+            var genreToDelete = _context.BookGenres.Where(a => a.Id == id && a.IsActive).FirstOrDefault();
+            if (genreToDelete != null)
+            {
+                genreToDelete.IsActive = false;
+                _context.Update(genreToDelete);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool CheckExistingTargetAudience(string name)
+        {
+            if (name != null)
+            {
+                var checkTargetAudience = _context.TargetAudiences.Where(x => x.Name == name && x.IsActive).FirstOrDefault();
+                if (checkTargetAudience != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool CreateAudience(string name)
+        {
+            if (name != null)
+            {
+                var tagetAudience = new TargetAudience()
+                {
+                    Name = name,
+                    DateCreated = DateTime.Now,
+                    IsActive = true,
+                };
+                _context.TargetAudiences.Add(tagetAudience);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public List<TargetAudienceViewModel> GetAllAudience()
+        {
+            var audienceViewModel = new List<TargetAudienceViewModel>();
+            audienceViewModel = _context.TargetAudiences.Where(x => x.Id > 0 && x.IsActive)
+                .Select(x => new TargetAudienceViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    DateCreated = x.DateCreated,
+                }).ToList();
+            return audienceViewModel;
+        }
+        public TargetAudienceViewModel GetAudienceToEdit(int id)
+        {
+            var audienceToEdit = _context.TargetAudiences.Where(a => a.Id == id && a.IsActive)
+                .Select(a => new TargetAudienceViewModel()
+                {
+                    Name = a.Name,
+                    Id = a.Id,
+                    DateCreated = a.DateCreated,
+                }).FirstOrDefault();
+            if (audienceToEdit != null)
+            {
+                return audienceToEdit;
+            }
+            return null;
+        }
+
+        public bool SaveEditedAudience(int id, string name)
+        {
+            if (id > 0 && name != null)
+            {
+                var editAudience = _context.TargetAudiences.Where(x => x.Id == id && x.IsActive).FirstOrDefault();
+                if (editAudience != null)
+                {
+                    editAudience.Name = name;
+                }
+                _context.Update(editAudience);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteAudience(int id)
+        {
+            var audienceToDelete = _context.TargetAudiences.Where(a => a.Id == id && a.IsActive).FirstOrDefault();
+            if (audienceToDelete != null)
+            {
+                audienceToDelete.IsActive = false;
+                _context.Update(audienceToDelete);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+
+        public bool CheckExistingStyleName(string name)
+        {
+            if (name != null)
+            {
+                var checkStyle = _context.WritingStyles.Where(x => x.Name == name && x.IsActive).FirstOrDefault();
+                if (checkStyle != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool CreateWritingStyle(string name)
+        {
+            if (name != null)
+            {
+                var writingStyle = new WritingStyle()
+                {
+                    Name = name,
+                    DateCreated = DateTime.Now,
+                    IsActive = true,
+                };
+                _context.WritingStyles.Add(writingStyle);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public List<WritingStylesViewModel> GetWritingStyles()
+        {
+            var styleViewModel = new List<WritingStylesViewModel>();
+            styleViewModel = _context.WritingStyles.Where(x => x.Id > 0 && x.IsActive)
+                .Select(x => new WritingStylesViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    DateCreated = x.DateCreated,
+                }).ToList();
+            return styleViewModel;
+        }
+        public WritingStylesViewModel GetStyleToEdit(int id)
+        {
+            var styleToEdit = _context.WritingStyles.Where(a => a.Id == id && a.IsActive)
+                .Select(a => new WritingStylesViewModel()
+                {
+                    Name = a.Name,
+                    Id = a.Id,
+                    DateCreated = a.DateCreated,
+                }).FirstOrDefault();
+            if (styleToEdit != null)
+            {
+                return styleToEdit;
+            }
+            return null;
+        }
+
+        public bool SaveEditedStyle(int id, string name)
+        {
+            if (id > 0 && name != null)
+            {
+                var editStyle = _context.WritingStyles.Where(x => x.Id == id && x.IsActive).FirstOrDefault();
+                if (editStyle != null)
+                {
+                    editStyle.Name = name;
+                }
+                _context.Update(editStyle);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteStyle(int id)
+        {
+            var styleToDelete = _context.WritingStyles.Where(a => a.Id == id && a.IsActive).FirstOrDefault();
+            if (styleToDelete != null)
+            {
+                styleToDelete.IsActive = false;
+                _context.Update(styleToDelete);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+
+
     }
 }

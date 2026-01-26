@@ -47,7 +47,10 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 });
 
 builder.Services.AddScoped<IUserHelper, UserHelper>();
+builder.Services.AddScoped<IDropdownHelper, DropdownHelper>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddHttpClient<IBookService, BookService>();
+builder.Services.AddHttpClient<ICoverGenerationService, CoverGenerationService>();
 
 
 // Add services to the container.

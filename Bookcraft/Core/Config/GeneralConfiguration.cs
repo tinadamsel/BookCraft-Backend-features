@@ -10,6 +10,8 @@ namespace Core.Config
     {
         public string AdminEmail { get; set; }
         public string DeveloperEmail { get; set; }
+        public string ChatGptAuthorization { get; set; }
+        public string ChatGptBaseAddress { get; set; }
 
     }
 }

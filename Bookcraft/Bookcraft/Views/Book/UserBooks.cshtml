@@ -1,0 +1,93 @@
+﻿@model Core.ViewModels.BookViewModel
+
+@{
+    ViewData["Title"] = "My Books";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<main class="main">
+    <!-- Refactor to suite my books cards when you get to that stage-->
+    <section id="features" class="services section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Powerful Features</h2>
+            <p>Everything you need to write, design, and publish professional books with the power of AI</p>
+        </div><!-- End Section Title -->
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h4><a href="service-details.html">AI story generation </a></h4>
+                        <p>
+                            Advanced AI creates compelling narratives, develops complex characters and
+                            maintains consistent story lines throughout your book.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-layout-text-window-reverse"></i>
+                        </div>
+                        <h4>Professional Templates</h4>
+                        <p> Choose from dozens of professionally designed book templates for different genres and writing styles.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-pencil-square"></i>
+                        </div>
+                        <h4>Smart Editing Tools</h4>
+                        <p> Grammar checking, style suggestions and pilot consistency analysis powered by advanced language models.</p>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h4>Custom Cover Design</h4>
+                        <p>Create stunning book covers AI generated artworks. custom fonts and professional design elements.</p>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <h4>Genre Intelligence </h4>
+                        <p>AI understands genre conventions and helps you write authenic stories that resonates with your target audience. </p>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="bi bi-download"></i>
+                        </div>
+                        <h4>Multi-Format Download</h4>
+                        <p>Export your finished books as PDF, or print-ready, formats with one click.</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section><!-- /Services Section -->
+
+</main>

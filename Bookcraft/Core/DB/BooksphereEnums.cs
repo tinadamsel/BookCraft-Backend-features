@@ -11,12 +11,18 @@ namespace Core.DB
     {
         public enum BookStatus
         {
-            [Description("For Pending")]
-            Pending = 1,
             [Description("For Inprogress")]
-            Inprogress = 2,
+            Inprogress = 1,
             [Description("For Completed")]
-            Completed = 3,
+            Completed = 2,
+        }
+
+        public enum ChapterStatus
+        {
+            Draft,
+            Generated,
+            Edited,
+            Final
         }
     }
 }

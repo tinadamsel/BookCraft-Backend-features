@@ -1,0 +1,504 @@
+﻿@model Core.ViewModels.BookViewModel
+
+@{
+    ViewData["Title"] = "New Book";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <!-- <h1> Welcome! <small> Admin </small> </h1>  -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active"> <small> Dashboard </small> </li>
+                <li class="breadcrumb-item active"> <small> New book </small> </li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+    <section class="section dashboard mt-5">
+        <div class="row mx-auto">
+            <div class="pagetitle text-center">
+                <h1> Create New Book</h1>
+                <p class="text-secondary"> Let our AI help you craft the perfect book from start to finish</p>
+            </div>
+            <!-- form column 1 -->
+            <div class="col-lg-10 mx-auto" id="step1">
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body text-white">
+                                <p class="text-white mb-1 mt-4"> Step 1 of 4 </p>
+                                <div class="progress" style="height:20px">
+                                    <div class="progress-bar progress-bar-striped" style="width:25%;height:20px"> 25%</div>
+                                </div>
+                                <!-- <div class="progress-container">
+                                    <div class="progress-bar" id="progressBar"></div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body">
+                                <form class="row g-3">
+                                    <div class="pagetitle text-left mt-5">
+                                        <h1> Create New Book</h1>
+                                        <p class="text-secondary"> Tell us about your project </p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label text-white">Book Title *</label>
+                                        <input type="text" class="form-control2" id="inputName5" placeholder="Enter book name">
+                                    </div>
+                                    <!-- Make the genre, target audience and writing styles select tag
+                                     Also Remember to Add prompt the AI to add suitable images in between the pages-->
+
+                                    <div class="col-md-6">
+                                        <label class="form-label text-white">Genre *</label>
+                                        <select id="genreId" style="background-color:transparent !important;" 
+                                            asp-items="@(new SelectList(ViewBag.Genre, "Id", "Name"))" 
+                                            class="form-control2" class="custom-select" required>
+                                        </select>
+                                        @* <select class="form-control2" id="">
+                                            <option value="" selected> Select Genre </option>
+                                            <option value="Fiction"> Fiction </option>
+                                            <option value="Fantasy"> Fantasy </option>
+                                            <option value="Romance"> Romance </option>
+                                            <option value="Children Novels"> Children Novel </option>
+                                            <option value="Kiddies"> Kiddies </option>
+
+                                        </select> *@
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label text-white">Target Audience *</label>
+                                        <select id="targetaudId" asp-items="@(new SelectList(ViewBag.TargetAudience, "Id", "Name"))"
+                                                class="form-control2" class="custom-select" required>
+                                        </select>
+
+                                        @* <select class="form-control2" id="">
+                                            <option value="" selected> Select your Target Audience </option>
+                                            <option value="Children (5yrs - 11yrs)"> Children (5yrs - 11yrs) </option>
+                                            <option value="Teenagers (12years - 19yrs)"> Teenagers (12years - 19yrs) </option>
+                                            <option value="Adult (20yrs - 50yrs)"> Adult (20yrs - 50yrs) </option>
+                                            <option value="Elderly (Above 50yrs)"> Elderly (Above 50yrs) </option>
+                                            <option value="Professional / Academic"> Professional / Academic </option>
+                                        </select> *@
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-center mt-4">
+                        <div class="d-flex justify-content-between">
+                            <button class="btn card-button" id="prev1"> <i class="bi bi-box-arrow-left px-1"></i> Previous</button>
+                            <button class="btn card-button" id="next1">Next <i class="bi bi-box-arrow-right px-1"></i></button>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- form column 1 end -->
+            <!-- form column 2 -->
+            <div class="col-lg-10 mx-auto mt-2" id="step2" style="display: none;">
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body text-white">
+                                <p class="text-white mb-1 mt-4"> Step 2 of 4 </p>
+                                <div class="progress" style="height:20px">
+                                    <div class="progress-bar progress-bar-striped" style="width:50%;height:20px"> 50%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body">
+                                <form class="row g-3">
+                                    <div class="pagetitle text-left mt-5">
+                                        <h1> Writing Preferences </h1>
+                                        <p class="text-secondary"> Define your writing style and preferences </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label text-white">Book Length <small> (no of pages should not be more than 200) * </small></label>
+                                        <input type="email" class="form-control2" id="inputEmail5" placeholder="Enter book length">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label text-white">Select Writing Style *</label>
+                                        <select id="writingStyleId" asp-items="@(new SelectList(ViewBag.WritingStyles, "Id", "Name"))"
+                                                class="form-control2" class="custom-select" required>
+                                        </select>
+                                        @* <select id="writingStyle" class="form-control2">
+                                            <option value="">Select your style</option>
+                                            <option value="Descriptive">Descriptive</option>
+                                            <option value="Narrative">Narrative</option>
+                                            <option value="Expository">Expository</option>
+                                            <option value="Persuasive">Persuasive</option>
+                                            <option value="Poetic">Poetic</option>
+                                            <option value="Minimalist">Minimalist</option>
+                                        </select> *@
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="text-white" id="uploadbtn"
+                                                style=" color: lightgrey !important;
+                                            background-color: black !important;
+                                            background-clip: padding-box;
+                                            border: 1px solid #ced4da !important;
+                                            padding: .8rem .75rem !important;
+                                            border-radius: 8.375rem;">
+                                            <i class="bi bi-upload px-1"></i> Upload Content (if any)
+                                        </button>
+                                    </div>
+                                    <div class="upload-box text-center p-4 mt-3" id="uploadContent" style="display: none;">
+                                        <i class="bi bi-cloud-arrow-up" style="font-size: 48px; color: #9a9aee;"></i>
+                                        <h5 class="text-white mt-2">Upload your content</h5>
+                                        <p class="text-secondary mb-2">Accepted formats: PDF, DOCX, TXT</p>
+
+                                        <input type="file" id="content" class="file-input" accept=".pdf,.docx,.txt">
+                                        <label for="content" class="btn card-button mt-2">
+                                            <i class="bi bi-upload"></i> Choose File
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="bookdesc" class="form-label text-white">Book Description *</label>
+                                        <p> <small> <i>Describe your book concept, main themes, characters or key points, you want to cover</i></small></p>
+                                        <textarea class="form-control2" cols="30" rows="5" id="bookdesc" style="border-radius: 1.5rem;">
+                                        </textarea>
+                                    </div>
+                                    <p> <small> The more details you provide, the better our AI can help structure your book</small></p>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-center mt-4">
+                        <div class="d-flex justify-content-between">
+                            <button class="btn card-button" id="prev2"> <i class="bi bi-box-arrow-left px-1"></i> Previous</button>
+                            <button class="btn card-button" id="next2">Next <i class="bi bi-box-arrow-right px-1"></i></button>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- form column 2 end -->
+            <!-- form column 3 -->
+            <div class="col-lg-10 mx-auto mt-2" id="step3" style="display: none;">
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body text-white">
+                                <p class="text-white mb-1 mt-4"> Step 3 of 4 </p>
+                                <div class="progress" style="height:20px">
+                                    <div class="progress-bar progress-bar-striped" style="width:75%;height:20px"> 75%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title mb-1"> <i class="bi bi-stars px-1"></i>AI Generated Outline  </h5>
+                                <p class="text-secondary mt-0"> <small> Review and Customize your book outline </small> </p>
+
+                                <div class="align-items-center">
+                                    <div class="d-flex justify-content-center">
+                                        <button class="btn"
+                                                style="padding: 10px; border-radius: 5px;
+                                            background: linear-gradient(90deg, #00d1fb, rgb(219 4 200));
+                                            color: white;">
+                                            <i class="bi bi-box-seam fs-3 p-2"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <h5 class="card-title"> Generate AI Outline  </h5>
+                                <p class="text-secondary">Let our AI create a detailed outline based on your book details and preferences </p>
+                                <div class="align-items-center">
+                                    <div class="d-flex justify-content-center">
+                                        <button class="btn card-button"><i class="bi bi-box-arrow-right px-1" onclick="GenerateBookOutline()"></i> Generate Outline </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-center mt-4">
+                        <div class="d-flex justify-content-between">
+                            <button class="btn card-button" id="prev3"> <i class="bi bi-box-arrow-left px-1"></i> Previous</button>
+                            <button class="btn card-button" id="next3">Next <i class="bi bi-box-arrow-right px-1"></i></button>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- form column 3 end -->
+            <!-- form column 4 -->
+            <div class="col-lg-12 mx-auto mt-2" id="step4" style="display: none;">
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body text-white">
+                                <p class="text-white mb-1 mt-4"> Step 4 of 4 </p>
+                                <div class="progress" style="height:20px">
+                                    <div class="progress-bar progress-bar-striped" style="width:100%;height:20px"> 100%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="info-card sales-card">
+                                            <div class="align-items-center mt-4">
+                                                <div class="d-flex justify-content-between">
+                                                    <h5 class="card-title mt-3"> Chapter Outline </h5>
+                                                    <button class="btn text-white" onclick="GenerateBookOutline()"> Regenerate </button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <!-- Start Card -->
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="info-card sales-card">
+                                                        <div class="card-body">
+                                                            <div class="align-items-center">
+                                                                <div class="d-flex justify-content-between mt-3">
+                                                                    <h5 class="card-title" style="font-size: small;">  Chapter One: The Discovery</h5>
+                                                                    <span class="badge badge-light"> Completed <i class="bi bi-check-circle px-1"></i> </span>
+                                                                </div>
+                                                            </div>
+                                                            <p class="card-text text-secondary">The protagonist discovers an ancient artifact that changes ... </p>
+                                                        </div>
+                                                        <div class="card-body mt-3">
+                                                            <div class="align-items-center">
+                                                                <div class="d-flex justify-content-between mt-3">
+                                                                    <h5 class="card-title" style="font-size: small;">  Chapter Two: First Contact</h5>
+                                                                    <span class="badge badge-light"> Completed <i class="bi bi-check-circle px-1"></i> </span>
+                                                                </div>
+                                                            </div>
+                                                            <p class="card-text text-secondary">The protagonist discovers an ancient artifact that changes ... </p>
+                                                        </div>
+                                                        <div class="card-body mt-3">
+                                                            <div class="align-items-center">
+                                                                <div class="d-flex justify-content-between mt-3">
+                                                                    <h5 class="card-title" style="font-size: small;">  Chapter Three: The Mentor</h5>
+                                                                    <span class="badge badge-light"> Completed <i class="bi bi-check-circle px-1"></i> </span>
+                                                                </div>
+                                                            </div>
+                                                            <p class="card-text text-secondary">The protagonist discovers an ancient artifact that changes ... </p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- End Card -->
+                                            </div>
+
+                                            <!-- <p class="card-text text-white"> Start a fresh project with AI assistance</p> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="info-card sales-card">
+                                            <div class="align-items-center mt-4">
+                                                <div class="d-flex justify-content-start">
+                                                    <h5 class="card-title mt-3"> Chapter One: The Discovery </h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <!-- Start Card -->
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="info-card sales-card">
+                                                        <div class="card-body">
+                                                            <!-- <div class="align-items-center">
+                                                                <div class="d-flex justify-content-between mt-3">
+                                                                    <h5 class="card-title" style="font-size: small;">  Chapter One: The Discovery</h5>
+                                                                    <span class="badge badge-light"> Completed <i class="bi bi-check-circle px-1"></i> </span>
+                                                                </div>
+                                                            </div> -->
+                                                            <p class="card-text text-secondary mt-2">
+                                                                The protagonist discovers an ancient artifact that changes everything.
+                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo atque dolorum
+                                                                ratione voluptate excepturi non deleniti expedita neque id perspiciatis laborum
+                                                                vitae amet voluptatem dicta nisi alias ea, sunt ipsam! Lorem ipsum, dolor sit amet
+                                                                consectetur adipisicing elit. Quidem odio facere molestias nam iusto deleniti totam
+                                                                sit praesentium, perferendis ipsum in repudiandae velit nulla? Autem delectus libero
+                                                                ratione cupiditate voluptas!. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                                                                Deserunt asperiores cumque id, distinctio eos porro voluptates eveniet, laudantium sequi
+                                                                minus, labore placeat qui ea corrupti rerum provident possimus necessitatibus autem?
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Card -->
+                                            </div>
+
+                                            <!-- <p class="card-text text-white"> Start a fresh project with AI assistance</p> -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-items-center mt-4">
+                        <div class="d-flex justify-content-between">
+                            <button class="btn card-button" id="prev4"><i class="bi bi-box-arrow-left px-1"></i> Previous</button>
+                            <button class="btn card-button" id="finishBtn"> Preview<i class="bi bi-box-arrow-right px-1"></i></button>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- form column 4 end -->
+            <!-- book success column -->
+            <div class="col-lg-12 mx-auto mt-4" id="successStep" style="display: none;">
+                <div class="pagetitle text-center">
+                    <span class="badge mt-3" style="border: 2px solid green; border-radius: 20px; padding: 18px;"> Succesfully Generated <i class="bi bi-check-circle px-1"></i> </span>
+                    <h1 class="mt-3" style="color: white; font-weight: bolder;"> Your Book is Ready!</h1>
+                    <p class="text-secondary text-center mb-5"> Discover our AI masterpiece below. Every page tells a <br> story waiting to be shared with the world</p>
+                </div>
+
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-8 col-md-8">
+                        <div class="card-body mb-3">
+                            <div class="row g-3">
+                                <h5 class="card-title mb-0"> The Digital Renaissance </h5>
+                                <p class="card-text text-secondary mt-0"> <small> Generated on 1/11/2025 </small></p>
+
+                                <div class="col-md-3" style="font-size: smaller;">
+                                    <p class="text-white"> <i class="bi bi-person "></i> <b> Author: </b> Teena</p>
+                                </div>
+                                <div class="col-md-3" style="font-size: smaller;">
+                                    <p class="text-white"> <i class="bi bi-person "></i> <b> Genre: </b> Friction</p>
+                                </div>
+                                <div class="col-md-3" style="font-size: smaller;">
+                                    <p class="text-white"> <i class="bi bi-person px-1 "></i> <b> Chapters: </b> 20</p>
+                                </div>
+                                <div class="col-md-3" style="font-size: smaller;">
+                                    <p class="text-white"> <i class="bi bi-person px-1 "></i> <b> Pages: </b> 250</p>
+                                </div>
+                                <p class="text-white"><i class="bi bi-clock px-1 "></i> Estimated Reading time: 4hrs 30mins</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <!-- Start Card -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="info-card sales-card">
+                                <div class="card-body">
+                                    <div class="align-items-center">
+                                        <div class="d-flex justify-content-between mt-3">
+                                            <h5 class="card-title" style="font-size: small;"><i class="bi bi-eye px-1 "></i>  Overview </h5>
+                                            <div class="align-items-center mt-4">
+                                                <div class="d-flex justify-content-end">
+                                                    <button class="btn text-white mx-3"><i class="bi bi-box-arrow-right px-1"></i> Previous</button>
+                                                    <button class="btn text-white"> Next <i class="bi bi-box-arrow-right px-1"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-secondary mt-2">
+                                        The protagonist discovers an ancient artifact that changes everything.
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo atque dolorum
+                                        ratione voluptate excepturi non deleniti expedita neque id perspiciatis laborum
+                                        vitae amet voluptatem dicta nisi alias ea, sunt ipsam! Lorem ipsum, dolor sit amet
+                                        consectetur adipisicing elit. Quidem odio facere molestias nam iusto deleniti totam
+                                        sit praesentium, perferendis ipsum in repudiandae velit nulla? Autem delectus libero
+                                        ratione cupiditate voluptas!. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                                        Deserunt asperiores cumque id, distinctio eos porro voluptates eveniet, laudantium sequi
+                                        minus, labore placeat qui ea corrupti rerum provident possimus necessitatibus autem?
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Card -->
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 mt-0">
+                        <div class="row g-3">
+                            <h5 class="card-title mb-0"> <i class="bi bi-box-arrow-down px-1"></i> Download your book  </h5>
+                            <p class="card-text text-secondary mt-0"> <small> Choose your preferred format </small></p>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 mt-2 mb-3">
+                            <div class="card-body mb-3">
+                                <div class="row g-3">
+                                    <h5 class="card-title mb-0"> <i class="bi bi-file-pdf text-danger px-1"></i> Download PDF  </h5>
+                                    <p class="card-text text-secondary mt-0 mx-3"> <small>Perfect for reading </small></p>
+
+                                </div>
+                            </div>
+                            <div class="card-body mb-3">
+                                <div class="row g-3">
+                                    <h5 class="card-title mb-0"> <i class="bi bi-filetype-docx text-success px-1"></i> Download DOCX  </h5>
+                                    <p class="card-text text-secondary mt-0 mx-3"> <small> Editable format </small></p>
+
+                                </div>
+                            </div>
+                            <div class="card-body mb-3">
+                                <div class="row g-3">
+                                    <h5 class="card-title mb-0"> <img src="asset/img/epub.png" style="width: 20px;"> Download EPUB  </h5>
+                                    <p class="card-text text-secondary mt-0"> <small> E-reader compatible </small></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="info-card sales-card">
+                                <div class="card-body text-center">
+                                    <div class="align-items-center">
+                                        <div class="d-flex justify-content-center mt-4">
+                                            <a class="btn"
+                                               style="padding: 10px; border-radius: 5px;
+                                                background: linear-gradient(90deg, #00d1fb, rgb(219 4 200));
+                                                color: white;"><i class="bi bi-palette fs-3 p-2"></i> </a>
+                                        </div>
+                                    </div>
+                                    <h5 class="card-title mb-1"> Create a book cover for your book </h5>
+                                    <p class="text-secondary mt-0"> <small> Design a stunning cover that captures your story's essence and attracts readers. </small> </p>
+
+                                    <div class="align-items-center">
+                                        <div class="d-flex justify-content-center">
+                                            <a class="btn card-button" href="createbookCover.html"><i class="bi bi-stars px-1"></i> Generate Cover </a>
+                                        </div>
+                                    </div>
+                                    <p class="text-secondary mt-3" style="font-size: smaller;">AI-powered . Professional Quality . Instant results </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- book success column end -->
+        </div>
+    </section>
+</main><!-- End #main -->
