@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static Core.DB.BooksphereEnums;
 
-namespace Core.Models
+namespace Core.ViewModels
 {
-    public class Chapters
+    public class BookChaptersViewModel
     {
         public int Id { get; set; }
         public int? ChapterNumber { get; set; }
@@ -16,13 +17,8 @@ namespace Core.Models
         public string? ChapterContent { get; set; }
         public ChapterStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
-        [ForeignKey("BookId")]
         public int BookId { get; set; }
         public virtual Book? Book { get; set; }
         public string? Content { get; set; }
-        
-
     }
-
-
 }

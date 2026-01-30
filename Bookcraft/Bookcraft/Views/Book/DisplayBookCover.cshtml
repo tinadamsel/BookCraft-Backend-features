@@ -1,0 +1,179 @@
+﻿@model Core.ViewModels.BookViewModel
+
+@{
+    ViewData["Title"] = "Book Cover Design";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <!-- <h1> Welcome! <small> Admin </small> </h1>  -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active"> <small> Dashboard </small> </li>
+                <li class="breadcrumb-item active"> <small> Book Cover Design </small> </li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+    <section class="section dashboard mt-5">
+        <div class="row mx-auto">
+
+            <!-- gen2 -->
+            <div class="col-lg-12 mx-auto mt-2" id="gen2">
+                <div class="pagetitle text-center mt-2 mb-5">
+                    <h1> AI Generated Book Cover</h1>
+                    <p class="text-secondary"> Review your book cover and download book </p>
+                </div>
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-10 col-md-10">
+                        <div class="info-card sales-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-8">
+                                        <div class="info-card sales-card">
+                                            <div class="align-items-center mt-4">
+                                                <div class="d-flex justify-content-between">
+                                                    <h5 class="card-title" style="font-size: small;">  Preview</h5>
+                                                    <button class="btn text-white" onclick="GenerateCover()"> <b> Regenerate </b></button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <!-- Start Card -->
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="info-card sales-card"> 
+                                                        <div class="card-body" style="height: 600px; border: 2px dotted lightgray;">
+                                                            <img src="@Model.CoverDesignUrl" class="img-fluid rounded shadow-lg" style="max-height: 580px; width: 100%"
+                                                                 alt="Book Cover" />
+                                                                <input id="book_Id" value="@Model.Id" hidden>
+                                                        </div>
+                                                    </div>
+                                                    @* be able to save the cover after generating *@
+                                                </div>
+                                                <!-- End Card -->
+                                            </div>
+                                            <!-- <p class="card-text text-white"> Start a fresh project with AI assistance</p> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4"> 
+                                        <div class="row g-3">
+                                            <h5 class="card-title mb-0"> <i class="bi bi-box-arrow-down px-1"></i> Download your book  </h5>
+                                            <p class="card-text text-secondary mt-0"> <small> Choose your preferred format </small></p>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12 mt-2 mb-3">
+                                            <div class="card-body mb-3">
+                                                <div class="row g-3">
+                                                    <h5 class="card-title mb-0"> <i class="bi bi-file-pdf text-danger px-1"></i> Download PDF  </h5>
+                                                    <p class="card-text text-secondary mt-0 mx-3"> <small>Perfect for reading </small></p>
+                                                    <button type="button" class="btn card-button rounded-pill">
+                                                        @* <a href="/Book/DownloadPdf?bookId=@Model.Id">Download PDF</a> *@
+                                                        <a asp-controller="Book" asp-action="DownloadPdf" asp-route-bookId="@Model.Id" style="color: white">
+                                                            Download PDF
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body mb-3">
+                                                <div class="row g-3">
+                                                    <h5 class="card-title mb-0"> <i class="bi bi-filetype-docx text-success px-1"></i> Download DOCX  </h5>
+                                                    <p class="card-text text-secondary mt-0 mx-3"> <small> Editable format </small></p>
+                                                    <button type="button" class="btn card-button rounded-pill">
+                                                        <a asp-controller="Book" asp-action="DownloadDocx" asp-route-bookId="@Model.Id" style="color: white">
+                                                            Download DOCX
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body mb-3">
+                                                <div class="row g-3">
+                                                    <h5 class="card-title mb-0"> <img src="asset/img/epub.png" style="width: 20px;"> Download EPUB  </h5>
+                                                    <p class="card-text text-secondary mt-0"> <small> E-reader compatible </small></p>
+                                                    <button type="button" class="btn card-button rounded-pill">
+                                                        <a asp-controller="Book" asp-action="DownloadEpub" asp-route-bookId="@Model.Id" style="color: white">
+                                                            Download EPUB
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @* <div class="col-lg-5 col-md-5">
+                                        <div class="info-card sales-card">
+                                            <div class="align-items-center mt-4">
+                                                <div class="d-flex justify-content-start">
+                                                    <h5 class="card-title mt-3"> Cover Style </h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <!-- Start Card -->
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="info-card sales-card">
+                                                        <div class="card-body mt-3">
+                                                            <div class="align-items-center">
+                                                                <div class="justify-content-start mt-3">
+                                                                    <h5 class="card-title" style="font-size: small;">  The Detective Last Case</h5>
+                                                                    <span class="badge badge-light p-1 rounded-5" style="border: 2px solid lightgray;"> Friction </span>
+                                                                </div>
+                                                            </div>
+                                                            <p class="card-text text-secondary">The protagonist discovers an ancient artifact that changes ... </p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="card-body mt-3">
+                                                                    <h5 class="card-title mb-0" style="font-size: small;"> Minimalist</h5>
+                                                                    <p class="card-text text-secondary mt-0"> Clean and simple </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="card-body mt-3">
+                                                                    <h5 class="card-title mb-0" style="font-size: small;"> Illustrated</h5>
+                                                                    <p class="card-text text-secondary mt-0"> Digital art style </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="card-body mt-3">
+                                                                    <h5 class="card-title mb-0" style="font-size: small;"> Realistic </h5>
+                                                                    <p class="card-text text-secondary mt-0"> Photorealistic style </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="card-body mt-3">
+                                                                    <h5 class="card-title mb-0" style="font-size: small;"> Vintage</h5>
+                                                                    <p class="card-text text-secondary mt-0"> Clean and simple </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 col-lg-12 mt-3 mb-3">
+                                                                <label for="bookdesc" class="form-label text-white">Additional Details (optional)</label>
+                                                                <textarea class="form-control2" cols="30" rows="5" id="coverdesc" style="border-radius: 1.5rem; background-color: #101010f2 !important;">
+                                                                    </textarea>
+                                                            </div>
+
+                                                            <div class="align-items-center">
+                                                                <div class="d-flex justify-content-center">
+                                                                    <button class="btn card-button" id=""><i class="bi bi-stars px-1"></i> Generate Cover </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Card -->
+                                            </div>
+                                        </div>
+                                    </div> *@
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- gen2 end -->
+        </div>
+    </section>
+</main><!-- End #main -->

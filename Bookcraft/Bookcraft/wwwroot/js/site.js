@@ -68,6 +68,75 @@ function Register() {
 
 }
 
+function RegisterAdmin() {
+    debugger
+    var defaultBtnValue = $('#submit_btn').html();
+    $('#submit_btn').html("Please wait...");
+    $('#submit_btn').attr("disabled", true);
+
+    var data = {};
+    data.FullName = $('#fullname').val();
+    data.Email = $('#email').val();
+    data.Password = $('#pwd').val();
+    data.ConfirmPassword = $('#confirmpwd').val();
+
+    debugger
+    if (data.FullName == "" || data.FullName == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your full name");
+        return;
+    }
+    if (data.Email == "" || data.Email == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your email");
+        return;
+    }
+    if (data.Password == "" || data.Password == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your password");
+        return;
+    }
+    if (data.ConfirmPassword == "" || data.ConfirmPassword == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please re-enter your password");
+        return;
+    }
+
+    let userDetails = JSON.stringify(data);
+    $.ajax({
+        type: 'Post',
+        url: '/Account/AdminRegistration',
+        dataType: 'json',
+        data:
+        {
+            userDetails: userDetails,
+        },
+        success: function (result) {
+            if (!result.isError) {
+                debugger
+                var url = '/Account/Login';
+                successAlertWithRedirect(result.msg, url);
+                $('#submit_btn').html(defaultBtnValue);
+            }
+            else {
+                $('#submit_btn').html(defaultBtnValue);
+                $('#submit_btn').attr("disabled", false);
+                errorAlert(result.msg);
+            }
+        },
+        error: function (ex) {
+            $('#submit_btn').html(defaultBtnValue);
+            $('#submit_btn').attr("disabled", false);
+            errorAlert("Please check and try again. Contact Admin if issue persists..");
+        },
+    })
+
+}
+
 function login() {
     debugger
     var defaultBtnValue = $('#submit_btn').html();
@@ -225,7 +294,7 @@ function addGenre() {
     
     $.ajax({
         type: 'Post',
-        url: '/Admin/CreateGnere',
+        url: '/Admin/CreateGenre',
         dataType: 'json',
         data:
         {
@@ -301,7 +370,7 @@ function SaveEditedGenre() {
         success: function (result) {
             if (!result.isError) {
                 debugger
-                var url = '/Admin/Genre'
+                var url = '/Admin/BookGenre'
                 successAlertWithRedirect(result.msg, url)
                 $('#submit_Btn').html(defaultBtnValue);
             }
@@ -336,7 +405,7 @@ function DeleteGenre() {
         },
         success: function (result) {
             if (!result.isError) {
-                var url = '/Admin/Genre'
+                var url = '/Admin/BookGenre'
                 successAlertWithRedirect(result.msg, url)
                 $('#submit_Btn').html(defaultBtnValue);
             }
@@ -443,7 +512,6 @@ function SaveEditedAudience() {
         },
         success: function (result) {
             if (!result.isError) {
-                debugger
                 var url = '/Admin/Audience'
                 successAlertWithRedirect(result.msg, url)
                 $('#submit_Btn').html(defaultBtnValue);
@@ -587,7 +655,7 @@ function SaveEditedStyle() {
         success: function (result) {
             if (!result.isError) {
                 debugger
-                var url = '/Admin/WritingStyle'
+                var url = '/Admin/WritingStyles'
                 successAlertWithRedirect(result.msg, url)
                 $('#submit_Btn').html(defaultBtnValue);
             }
@@ -621,7 +689,7 @@ function DeleteStyle() {
         },
         success: function (result) {
             if (!result.isError) {
-                var url = '/Admin/WritingStyle'
+                var url = '/Admin/WritingStyles'
                 successAlertWithRedirect(result.msg, url)
                 $('#submit_Btn').html(defaultBtnValue);
             }
@@ -632,5 +700,201 @@ function DeleteStyle() {
         error: function (ex) {
             errorAlert("An error occured, please check and try again. Please contact admin if issue persists..");
         }
+    })
+}
+
+function GenerateBookOutline() {
+    var defaultBtnValue = $('#submit_btn').html();
+    $('#submit_btn').html('<strong style="color:#fff;">Please wait...</strong>');
+    $('#submit_btn').attr("disabled", true);
+
+    var data = {};
+    data.BookTitle = $('#bookName').val();
+    data.BookDescription = $('#bookdesc').val();
+    data.GenreId = $('#genreId').val();
+    data.TargetAudienceId = $('#targetaudId').val();
+    data.PageSize = $('#bookLength').val();
+    data.WritingStyleId = $('#writingStyleId').val();
+
+    if (data.BookTitle == "" || data.BookTitle == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in the book title");
+        return;
+    }
+    if (data.BookDescription == "" || data.BookDescription == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in the book Description");
+        return;
+    }
+    if (data.GenreId == 0 || data.GenreId == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please select book genre");
+        return;
+    }
+    if (data.TargetAudienceId == 0 || data.TargetAudienceId == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please select book target audience");
+        return;
+    }
+    if (data.PageSize == "" || data.PageSize == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please select book target audience");
+        return;
+    }
+    if (data.WritingStyleId == 0 || data.WritingStyleId == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please select book writing style");
+        return;
+    }
+
+    let bookDetails = JSON.stringify(data);
+    $.ajax({
+        type: 'Post',
+        url: '/Book/CreateNewBook',
+        dataType: 'json',
+        data:
+        {
+            bookDetails: bookDetails,
+        },
+        success: function (result) {
+            if (!result.isError) {
+                var bookId = result.bookId;
+                var url = '/Book/GetBook?bookId=' + bookId;
+                successAlertWithRedirect(result.msg, url);
+                $('#submit_btn').html(defaultBtnValue);
+            }
+            else {
+                $('#submit_btn').html(defaultBtnValue);
+                $('#submit_btn').attr("disabled", false);
+                errorAlert(result.msg);
+            }
+        },
+        error: function (ex) {
+            $('#submit_btn').html(defaultBtnValue);
+            $('#submit_btn').attr("disabled", false);
+            errorAlert("Please check and try again. Contact Admin if issue persists..");
+        },
+    })
+
+}
+
+
+let chapters = [];
+let currentIndex = 0;
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Expect chapters injected from Razor
+    chapters = window.bookChapters || [];
+
+    if (chapters.length === 0) {
+        console.warn("No chapters loaded");
+        return;
+    }
+
+    loadChapter(0);
+    document.getElementById("saveChapterBtn")
+        .addEventListener("click", saveChapter);
+
+    document.getElementById("nextBtn")
+        .addEventListener("click", nextChapter);
+});
+
+function loadChapter(index) {
+    const chapter = chapters[index];
+    if (!chapter) return;
+
+    currentIndex = index;
+    const editor = tinymce.get("chapterEditor");
+
+    if (!editor) {
+        console.warn("TinyMCE not ready yet");
+        return;
+    }
+    editor.setContent(chapter.chapterContent || "");
+}
+
+function saveChapter() {
+    const chapter = chapters[currentIndex];
+    const payload = {
+        BookId: document.getElementById("book_Id").value,
+        Id: chapter.chapterId,
+        Content: tinymce.get("chapterEditor").getContent()
+    };
+    $.ajax({
+        type: "POST",
+        url: "/Book/SaveChapter",
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+        success: function (result) {
+            if (!result.isError) {
+                successAlert(result.msg);
+            } else {
+                errorAlert(result.msg);
+            }
+        },
+        error: function () {
+            errorAlert("Failed to save chapter");
+        }
+    });
+}
+
+function nextChapter() {
+    saveChapter(); // optional auto-save before moving
+
+    if (currentIndex + 1 >= chapters.length) {
+        successAlert("You’ve reached the last chapter");
+        return;
+    }
+    loadChapter(currentIndex + 1);
+}
+
+function GenerateCover(){
+    var defaultBtnValue = $('#submit_btn').html();
+    $('#submit_btn').html('<strong style="color:#fff;">Please wait...</strong>');
+    $('#submit_btn').attr("disabled", true);
+    
+    var bookId = $('#book_Id').val();
+
+    $.ajax({
+        type: 'Post',
+        url: '/Book/GenerateBookCover',
+        dataType: 'json',
+        data:
+        {
+            bookId: bookId,
+        },
+        success: function (result) {
+            if (!result.isError) {
+
+                var bookId = result.bookId;
+                var coverUrl = result.coverUrl;
+
+                // Encode URL in case of special characters
+                var url = `/Book/DisplayBookCover?bookId=${bookId}`;
+
+                // Optional: store coverUrl temporarily (session/local)
+                sessionStorage.setItem("generatedCoverUrl", coverUrl);
+
+                successAlertWithRedirect(result.msg, url);
+                $('#submit_btn').html(defaultBtnValue);
+            }
+            else {
+                $('#submit_btn').html(defaultBtnValue);
+                $('#submit_btn').attr("disabled", false);
+                errorAlert(result.msg);
+            }
+        },
+        error: function (ex) {
+            $('#submit_btn').html(defaultBtnValue);
+            $('#submit_btn').attr("disabled", false);
+            errorAlert("Please check and try again. Contact Admin if issue persists..");
+        },
     })
 }

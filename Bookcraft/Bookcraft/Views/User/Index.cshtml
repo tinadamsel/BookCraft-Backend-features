@@ -33,7 +33,7 @@
                                 <p class="card-text text-white"> Start a fresh project with AI assistance</p>
                                 <div class="align-items-center">
                                     <div class="p-1">
-                                        <a class="btn btn-block mx-auto w-100 card-button" asp-controller="User" asp-action="CreateBook">
+                                        <a class="btn btn-block mx-auto w-100 card-button" asp-controller="Book" asp-action="CreateNewBook">
                                             Start writing now
                                         </a>
                                     </div>
@@ -50,7 +50,7 @@
                                 <p class="card-text text-white pt-2 pb-3"> Create stunning book covers </p>
                                 <div class="align-items-center">
                                     <div class="p-1">
-                                        <a class="btn btn-block mx-auto w-100 card-button" asp-controller="User" asp-action="CoverDesigns"> Create a book cover </a>
+                                        <a class="btn btn-block mx-auto w-100 card-button"> Create a book cover </a>
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +72,11 @@
                                 </p>
                                 <div class="align-items-center">
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn card-button">Next <i class="bi bi-box-arrow-right px-1"></i></button>
+                                        <a class="btn btn-block mx-auto w-100 card-button" asp-action="CreateNewBook" asp-controller="Book">
+                                            Start writing now <i class="bi bi-box-arrow-right px-1"></i>
+                                        </a>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

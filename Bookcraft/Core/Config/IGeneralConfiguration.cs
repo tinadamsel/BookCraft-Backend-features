@@ -12,5 +12,7 @@ namespace Core.Config
          string DeveloperEmail { get; set; }
          string ChatGptAuthorization { get; set; }
          string ChatGptBaseAddress { get; set; }
+         string ChatGptImageAddress { get; set; }
+         string BaseUrl { get; set; }
     }
 }

@@ -163,7 +163,6 @@ namespace Bookcraft.Controllers
             return Json(new { isError = true, msg = "Network Error" });
         }
 
-
         [HttpGet]
         public IActionResult WritingStyles()
         {

@@ -1,0 +1,201 @@
+﻿@model Core.ViewModels.BookViewModel
+
+@{
+    ViewData["Title"] = "Generated Book";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <!-- <h1> Welcome! <small> Admin </small> </h1>  -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active"> <small> Dashboard </small> </li>
+                <li class="breadcrumb-item active"> <small> Generated book </small> </li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+    <section class="section dashboard mt-5">
+        <div class="row mx-auto">
+            <div class="pagetitle text-center">
+                <h1> Create New Book</h1>
+                <p class="text-secondary"> Let our AI help you craft the perfect book from start to finish</p>
+            </div>
+            @* the success step is a page on its own *@
+            <!-- book success column -->
+            <div class="col-lg-12 mx-auto mt-4" id="successStep">
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="info-card sales-card">
+                            <div class="card-body text-white">
+                                <p class="text-white mb-1 mt-4"> Step 4 of 4 </p>
+                                <div class="progress" style="height:20px">
+                                    <div class="progress-bar progress-bar-striped" style="width:100%;height:20px"> 100%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+                <div class="pagetitle text-center">
+                    <span class="badge mt-3" style="border: 2px solid green; border-radius: 20px; padding: 18px;"> Succesfully Generated <i class="bi bi-check-circle px-1"></i> </span>
+                    <h1 class="mt-3" style="color: white; font-weight: bolder;"> Your Book is Ready!</h1>
+                    <p class="text-secondary text-center mb-5"> Discover our AI masterpiece below. Every page tells a story waiting to be shared with the world</p>
+                </div>
+
+                <div class="row">
+                    <!-- Start Card -->
+                    <div class="col-lg-8 col-md-8">
+                        <div class="card-body mb-3">
+                            <div class="row g-3">
+                                <h5 class="card-title mb-0"> @Model.BookTitle </h5>
+                                <input type="number" id="book_Id" value="@Model.Id" hidden>
+                                <p class="card-text text-secondary mt-0"> <small> Generated on @Model.DateCreated.ToString() </small></p>
+
+                                <div class="col-md-3" style="font-size: smaller;">
+                                    <p class="text-white"> <i class="bi bi-person "></i> <b> Author: </b> @Model.BookAuthor</p>
+                                </div>
+                                <div class="col-md-3" style="font-size: smaller;">
+                                    <p class="text-white"> <i class="bi bi-person "></i> <b> Genre: </b> @Model.GenreName</p>
+                                </div>
+                                <div class="col-md-3" style="font-size: smaller;">
+                                    <p class="text-white"> <i class="bi bi-person px-1 "></i> <b> Chapters: </b> @Model.TotalChapters</p>
+                                </div>
+                                <div class="col-md-3" style="font-size: smaller;">
+                                    <p class="text-white"> <i class="bi bi-person px-1 "></i> <b> Pages: </b> @Model.PageSize</p>
+                                </div>
+                                @* <p class="text-white"><i class="bi bi-clock px-1 "></i> Estimated Reading time: 4hrs 30mins</p> *@
+                            </div>
+                        </div>
+                        <hr />
+                        <!-- Start Card -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="info-card sales-card">
+                                <div class="card-body">
+                                    <div class="align-items-center">
+                                        <div class="d-flex justify-content-between mt-3">
+                                            <h5 class="card-title" style="font-size: small;"><i class="bi bi-eye px-1 "></i>  Book Overview </h5>
+                                            <div class="align-items-center mt-4">
+                                                <div class="d-flex justify-content-end">
+                                                    @* <button class="btn text-white mx-3" id="submit_btn" onclick="GenerateBookOutline()"> Regenerate </button> *@
+                                                    @* <button class="btn text-white mx-3"><i class="bi bi-box-arrow-right px-1"></i> Previous</button>
+                                                    <button class="btn text-white"> Next <i class="bi bi-box-arrow-right px-1"></i></button> *@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <textarea id="chapterEditor"></textarea>
+
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <button type="button" class="btn card-button" id="saveChapterBtn">
+                                            Save Chapter
+                                        </button>
+
+                                        <button type="button" class="btn card-button" id="nextBtn">
+                                            <i class="bi bi-box-arrow-right px-1"></i> Next Chapter
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Card -->
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 mt-0">
+                        <div class="row g-3">
+                            <h5 class="card-title mb-0"> <i class="bi bi-box-arrow-down px-1"></i> Download your book  </h5>
+                            <p class="card-text text-secondary mt-0"> <small class="text-white"> Choose your preferred format </small></p>
+                        </div>
+                        <div class="col-lg-12 col-md-12 mt-2 mb-3">
+                            <div class="card-body mb-3">
+                                <div class="row g-3">
+                                    <h5 class="card-title mb-0"> <i class="bi bi-file-pdf text-danger px-1"></i> Download PDF  </h5>
+                                    <p class="card-text text-secondary mt-0 mx-3"> <small>Perfect for reading </small></p>
+                                    <button type="button" class="btn card-button rounded-pill">
+                                        @* <a href="/Book/DownloadPdf?bookId=@Model.Id">Download PDF</a> *@
+                                        <a asp-controller="Book" asp-action="DownloadPdf" asp-route-bookId="@Model.Id" style="color: white">
+                                            <b> Download PDF </b>
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body mb-3">
+                                <div class="row g-3">
+                                    <h5 class="card-title mb-0"> <i class="bi bi-filetype-docx text-success px-1"></i> Download DOCX  </h5>
+                                    <p class="card-text text-secondary mt-0 mx-3"> <small> Editable format </small></p>
+                                    <button type="button" class="btn card-button rounded-pill">
+                                        <a asp-controller="Book" asp-action="DownloadDocx" asp-route-bookId="@Model.Id" style="color: white">
+                                            <b> Download DOCX </b>
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body mb-3">
+                                <div class="row g-3">
+                                    <h5 class="card-title mb-0"> <img src="asset/img/epub.png" style="width: 20px;"> Download EPUB  </h5>
+                                    <p class="card-text text-secondary mt-0"> <small> E-reader compatible </small></p>
+                                    <button type="button" class="btn card-button rounded-pill">
+                                        <a asp-controller="Book" asp-action="DownloadEpub" asp-route-bookId="@Model.Id" style="color: white">
+                                           <b>  Download EPUB </b>
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                                    
+                        <div class="col-lg-12 col-md-12">
+                            <div class="info-card sales-card">
+                                <div class="card-body text-center">
+                                    <div class="align-items-center">
+                                        <div class="d-flex justify-content-center mt-4">
+                                            <a class="btn"
+                                               style="padding: 10px; border-radius: 5px;
+                                                background: linear-gradient(90deg, #00d1fb, rgb(219 4 200));
+                                                color: white;"><i class="bi bi-palette fs-3 p-2"></i> </a>
+                                        </div>
+                                    </div>
+                                    <h5 class="card-title mb-1"> Create a book cover for your book </h5>
+                                    <p class="text-secondary mt-0"> <small> Design a stunning cover that captures your story's essence and attracts readers. </small> </p>
+
+                                    <div class="align-items-center">
+                                        <div class="d-flex justify-content-center">
+                                            
+                                            <button type="button" class="btn card-button rounded-pill" >
+                                                <a asp-controller="Book" asp-action="CreateBookCover" asp-route-bookId="@Model.Id" style="color: white">
+                                                    <i class="bi bi-stars px-1"></i> Generate Cover
+                                                </a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p class="text-secondary mt-3" style="font-size: smaller;">AI-powered . Professional Quality . Instant results </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- book success column end -->
+        </div>
+    </section>
+</main><!-- End #main -->
+
+
+<script>
+    window.bookChapters = @Html.Raw(Json.Serialize(
+        Model.Chapters.Select(c => new {
+            chapterId = c.Id,
+            chapterContent = c.ChapterContent
+        })
+    ));
+</script>
+
+
+ @* <script src="~/js/site.js" asp-append-version="true"></script> *@
+
+
+

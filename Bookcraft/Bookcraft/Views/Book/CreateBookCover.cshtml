@@ -29,7 +29,7 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title mb-1"> <i class="bi bi-stars px-1"></i>AI Generated Book Cover  </h5>
                                 <p class="text-secondary mt-0"> <small> Design a stunning cover that captures your story's essence. </small> </p>
-
+                                <input type="number" id="book_Id" value="@Model.Id" hidden>
                                 <div class="align-items-center">
                                     <div class="d-flex justify-content-center">
                                         <button class="btn"
@@ -45,7 +45,7 @@
                                 <p class="text-secondary text-center">Let our AI create a detailed outline based <br> on your book details and preferences </p>
                                 <div class="align-items-center">
                                     <div class="d-flex justify-content-center">
-                                        <button class="btn card-button" id="gen1"><i class="bi bi-stars px-1"></i> Generate Book Cover </button>
+                                        <button class="btn card-button" id="submit_btn" onclick="GenerateCover()"><i class="bi bi-stars px-1"></i> Generate Book Cover </button>
                                     </div>
                                 </div>
                             </div>
@@ -54,112 +54,29 @@
                 </div>
             </div>
             <!--  gen1 end -->
-            <!-- gen2 -->
-            <div class="col-lg-12 mx-auto mt-2" id="gen2">
-                <div class="pagetitle text-center mt-2 mb-5">
-                    <h1> AI Generated Book Cover</h1>
-                    <p class="text-secondary"> Review and customize your book cover</p>
-                </div>
-                <div class="row">
-                    <!-- Start Card -->
-                    <div class="col-lg-12 col-md-12">
-                        <div class="info-card sales-card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="info-card sales-card">
-                                            <div class="align-items-center mt-4">
-                                                <div class="d-flex justify-content-start">
-                                                    <h5 class="card-title mt-3"> Cover Style </h5>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <!-- Start Card -->
-                                                <div class="col-lg-12 col-md-12">
-                                                    <div class="info-card sales-card">
-                                                        <div class="card-body mt-3">
-                                                            <div class="align-items-center">
-                                                                <div class="justify-content-start mt-3">
-                                                                    <h5 class="card-title" style="font-size: small;">  The Detective Last Case</h5>
-                                                                    <span class="badge badge-light p-1 rounded-5" style="border: 2px solid lightgray;"> Friction </span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="card-text text-secondary">The protagonist discovers an ancient artifact that changes ... </p>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6">
-                                                                <div class="card-body mt-3">
-                                                                    <h5 class="card-title mb-0" style="font-size: small;"> Minimalist</h5>
-                                                                    <p class="card-text text-secondary mt-0"> Clean and simple </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6">
-                                                                <div class="card-body mt-3">
-                                                                    <h5 class="card-title mb-0" style="font-size: small;"> Illustrated</h5>
-                                                                    <p class="card-text text-secondary mt-0"> Digital art style </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6">
-                                                                <div class="card-body mt-3">
-                                                                    <h5 class="card-title mb-0" style="font-size: small;"> Realistic </h5>
-                                                                    <p class="card-text text-secondary mt-0"> Photorealistic style </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6">
-                                                                <div class="card-body mt-3">
-                                                                    <h5 class="card-title mb-0" style="font-size: small;"> Vintage</h5>
-                                                                    <p class="card-text text-secondary mt-0"> Clean and simple </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 col-lg-12 mt-3 mb-3">
-                                                                <label for="bookdesc" class="form-label text-white">Additional Details (optional)</label>
-                                                                <textarea class="form-control2" cols="30" rows="5" id="coverdesc" style="border-radius: 1.5rem; background-color: #101010f2 !important;">
-                                                                    </textarea>
-                                                            </div>
-
-                                                            <div class="align-items-center">
-                                                                <div class="d-flex justify-content-center">
-                                                                    <button class="btn card-button" id=""><i class="bi bi-stars px-1"></i> Generate Cover </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Card -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="info-card sales-card">
-                                            <div class="align-items-center mt-4">
-                                                <div class="d-flex justify-content-between">
-                                                    <h5 class="card-title" style="font-size: small;">  Preview</h5>
-                                                    <button class="btn text-white"> Regenerate </button>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <!-- Start Card -->
-                                                <div class="col-lg-12 col-md-12">
-                                                    <div class="info-card sales-card">
-                                                        <div class="card-body" style="height: 600px; border: 2px dotted lightgray;">
-                                                            <img src="">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Card -->
-                                            </div>
-                                            <!-- <p class="card-text text-white"> Start a fresh project with AI assistance</p> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Card -->
-                </div>
-            </div>
-            <!-- gen2 end -->
+            @* The cover preview goes to another page *@
+           
         </div>
     </section>
 </main><!-- End #main -->
+
+@* <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const gen1Section = document.getElementById("gen1");
+      const gen2Section = document.getElementById("gen2");
+      const generateBtn = document.querySelector("#gen1 .card-button"); 
+
+     
+      gen2Section.style.display = "none";
+
+     
+      generateBtn.addEventListener("click", function () {
+       
+        gen1Section.style.display = "none";
+
+        
+        gen2Section.style.display = "block";
+        gen2Section.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+</script> *@

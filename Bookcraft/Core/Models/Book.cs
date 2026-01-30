@@ -14,7 +14,9 @@ namespace Core.Models
         public int? PageSize { get; set; }
         public string BookTitle { get; set; }
         public string? BookDescription { get; set; }
-        public string? BookOutline { get; set; }
+        public string? CoverImagePath { get; set; }
+        public int? BookOutline { get; set; }
+        public DateTime? DateCreated { get; set; }
         public string? BookImageUpload { get; set; }
         public List<Chapters>? Chapters { get; set; }
         public string? CoverDesignUrl { get; set; }

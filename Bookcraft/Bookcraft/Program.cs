@@ -1,14 +1,20 @@
 using Core.Config;
 using Core.DB;
 using Core.Models;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Logic.Helpers;
 using Logic.IHelpers;
 using Logic.Services;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("BookSphereProject")));
@@ -52,6 +58,9 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddHttpClient<IBookService, BookService>();
 builder.Services.AddHttpClient<ICoverGenerationService, CoverGenerationService>();
 
+builder.Services.AddSingleton<IConverter>(
+    new SynchronizedConverter(new PdfTools())
+);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

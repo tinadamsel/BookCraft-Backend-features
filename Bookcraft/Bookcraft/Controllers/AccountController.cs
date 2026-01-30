@@ -59,6 +59,42 @@ namespace Bookcraft.Controllers
             }
             return Json(new { isError = true, msg = "Network Error" });
         }
+        public IActionResult AdminRegister()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AdminRegistration(string userDetails)
+        {
+            if (userDetails != null)
+            {
+                var appUserViewModel = JsonConvert.DeserializeObject<ApplicationUserViewModel>(userDetails);
+                if (appUserViewModel != null)
+                {
+                    var checkEmail = await _userHelper.FindByEmailAsync(appUserViewModel.Email).ConfigureAwait(false);
+                    if (checkEmail != null)
+                    {
+                        return Json(new { isError = true, msg = "Email Already Exists" });
+                    }
+                    if (appUserViewModel.Password != appUserViewModel.ConfirmPassword)
+                    {
+                        return Json(new { isError = true, msg = "Password and Confirm password do not match" });
+                    }
+                    if (appUserViewModel.Password.Length < 8)
+                    {
+                        return Json(new { isError = true, msg = "Password must be from 8 characters" });
+                    }
+                    var createUser = await _userHelper.RegisterAdmin(appUserViewModel).ConfigureAwait(false);
+                    if (createUser)
+                    {
+                        return Json(new { isError = false, msg = "Registration Successful, Login to continue" });
+                    }
+                    return Json(new { isError = true, msg = "Unable to register" });
+                }
+            }
+            return Json(new { isError = true, msg = "Network Error" });
+        }
         [HttpGet]
         public IActionResult Login()
         {

@@ -31,6 +31,7 @@ namespace Logic.IHelpers
         string GetUserId(string username);
         string GetUserRole(string userId);
         List<WritingStylesViewModel> GetWritingStyles();
+        Task<bool> RegisterAdmin(ApplicationUserViewModel userDetails);
         Task<bool> RegisterUser(ApplicationUserViewModel userDetails);
         bool ResetPasswordLink(string email, string linkToClick, string fullname);
         bool SaveEditedAudience(int id, string name);

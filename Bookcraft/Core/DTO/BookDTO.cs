@@ -34,4 +34,47 @@ namespace Core.DTO
     {
         public string Title { get; set; }
     }
+
+    public class BookDownloadDto
+    {
+        public int BookId { get; set; }
+
+        public string BookTitle { get; set; } = string.Empty;
+
+        public string BookAuthor { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Absolute URL or file path used by PDF/DOCX/EPUB exporters
+        /// </summary>
+        public string CoverImageAbsoluteUrl { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Relative URL (useful for web preview)
+        /// </summary>
+        public string CoverImageUrl { get; set; } = string.Empty;
+
+        public int TotalChapters { get; set; }
+
+        public int EstimatedPages { get; set; }
+
+        public DateTime GeneratedOn { get; set; }
+
+        public List<ChapterDownloadDto> Chapters { get; set; } = new();
+    }
+
+    public class ChapterDownloadDto
+    {
+        public int ChapterId { get; set; }
+
+        public int? ChapterNumber { get; set; }
+
+        public string? ChapterTitle { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Final edited content used for export
+        /// </summary>
+        public string? Content { get; set; } = string.Empty;
+    }
+
+
 }

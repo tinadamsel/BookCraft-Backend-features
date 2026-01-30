@@ -1,93 +1,79 @@
-﻿@model Core.ViewModels.BookViewModel
+﻿@model IEnumerable<Core.ViewModels.BookViewModel> 
 
 @{
     ViewData["Title"] = "My Books";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1> My Books! </h1>
+        <!-- <h1> Welcome! <small> Admin </small> </h1> -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active"> <small> Dashboard </small> </li>
+                <li class="breadcrumb-item active"> <small> My Generated Books </small> </li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
 
-<main class="main">
-    <!-- Refactor to suite my books cards when you get to that stage-->
-    <section id="features" class="services section">
-
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-            <h2>Powerful Features</h2>
-            <p>Everything you need to write, design, and publish professional books with the power of AI</p>
-        </div><!-- End Section Title -->
-
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="row gy-4">
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-palette"></i>
-                        </div>
-                        <h4><a href="service-details.html">AI story generation </a></h4>
-                        <p>
-                            Advanced AI creates compelling narratives, develops complex characters and
-                            maintains consistent story lines throughout your book.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-layout-text-window-reverse"></i>
-                        </div>
-                        <h4>Professional Templates</h4>
-                        <p> Choose from dozens of professionally designed book templates for different genres and writing styles.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-pencil-square"></i>
-                        </div>
-                        <h4>Smart Editing Tools</h4>
-                        <p> Grammar checking, style suggestions and pilot consistency analysis powered by advanced language models.</p>
-
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-phone"></i>
-                        </div>
-                        <h4>Custom Cover Design</h4>
-                        <p>Create stunning book covers AI generated artworks. custom fonts and professional design elements.</p>
-
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-book"></i>
-                        </div>
-                        <h4>Genre Intelligence </h4>
-                        <p>AI understands genre conventions and helps you write authenic stories that resonates with your target audience. </p>
-
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-download"></i>
-                        </div>
-                        <h4>Multi-Format Download</h4>
-                        <p>Export your finished books as PDF, or print-ready, formats with one click.</p>
-
-                    </div>
-                </div>
+    <section class="section dashboard mt-5">
+        <div class="row mx-auto">
+            <div class="pagetitle text-center">
+                <h1>Powerful Features: View your generated books </h1>
+                <p class="text-secondary"> Let our AI help you craft the perfect book from start to finish</p>
             </div>
+            <!-- Left side columns -->
+            <div class="col-lg-12 mx-auto">
+                <div class="row">
+                    <div class="container" data-aos="fade-up" data-aos-delay="100">
+                        @if (Model != null)
+                        {
+                            <div class="row gy-4">
+                                @foreach (var book in Model)
+                                {
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="card-body">
+                                            <img src="@(string.IsNullOrWhiteSpace(book.CoverDesignUrl)
+                                                   ? Url.Content("~/asset/img/book-img.jpg") : book.CoverDesignUrl)"
+                                         class="card-img-top rounded mt-3" />
+                                            <h5 class="card-title text-secondary"> About this book  </h5>
+                                            <div class="align-items-center">
+                                                <div class="d-flex justify-content-between">
+                                                    <h5 class="card-title"> @book.BookTitle </h5>
+                                                    <p class="card-title" style="color: aqua; font-size: smaller;"> <small> Generated </small></p>
+                                                </div>
+                                            </div>
+                                            <p class="text-white"> <small> @book.BookDescription </small> </p>
+                                            <div class="align-items-center">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="card-text text-light"> <small> Pages: @book.PageSize </small></p>
+                                                    <p class="card-text text-light"> <small> Chapters: @book.TotalChapters </small></p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <a class="btn card-button" asp-controller="Book" asp-action="DownloadPdf" asp-route-bookId="@book.Id" style="color: white; font-size: 9px; padding: 5px">
+                                                     <b> Download PDF </b>
+                                                </a>
+                                                <a class="btn card-button" asp-controller="Book" asp-action="DownloadDocx" asp-route-bookId="@book.Id" style="color: white; font-size: 8px; padding: 5px">
+                                                    <b> Download DOCX </b>
+                                                </a>
+                                                <a class="btn card-button" asp-controller="Book" asp-action="DownloadEpub" asp-route-bookId="@book.Id" style="color: white; font-size: 8px; padding: 5px">
+                                                    <b>  Download EPUB </b>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div><!-- End Left side columns -->
+
         </div>
+    </section>
 
-    </section><!-- /Services Section -->
-
-</main>
+</main><!-- End main -->

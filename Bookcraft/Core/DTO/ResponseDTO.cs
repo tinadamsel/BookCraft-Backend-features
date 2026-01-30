@@ -31,5 +31,14 @@ namespace Core.DTO
             public Message message { get; set; }
         }
 
+        public class ImageGenerationResponse
+        {
+            public List<ImageData> data { get; set; }
+        }
+
+        public class ImageData
+        {
+            public string b64_json { get; set; }
+        }
     }
 }

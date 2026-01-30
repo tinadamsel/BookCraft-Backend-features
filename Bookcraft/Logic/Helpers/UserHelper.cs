@@ -151,7 +151,7 @@ namespace Logic.Helpers
                     user.PhoneNumber = "N/A";
                     user.DateRegistered = DateTime.Now;
                     user.Deactivated = false;
-                    user.IsAdmin = false;
+                    user.IsAdmin = true;
                     var createUser = await _userManager.CreateAsync(user, userDetails.Password).ConfigureAwait(false);
                     if (createUser.Succeeded)
                     {

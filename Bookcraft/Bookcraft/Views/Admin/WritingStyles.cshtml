@@ -25,7 +25,7 @@
 
                     <!-- Start Button -->
                     <div class="col-lg-12 col-sm-12 mb-5">
-                        <button type="button" class="btn btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#addStyle" style=" float: right; margin-right: 20px;">
+                        <button type="button" class="btn card-button rounded-pill" data-bs-toggle="modal" data-bs-target="#addStyle" style=" float: right; margin-right: 20px;">
                             Add Writng Style
                         </button>
                     </div>
@@ -41,29 +41,31 @@
                 <table class="table table-hover table-striped custom-table" id="dataTable">
                     <thead>
                         <tr>
-                            <th> S/N</th>
-                            <th> Name </th>
-                            <th> DateCreated</th>
-                            <th> Action</th>
+                            <th class="text-white"> S/N</th>
+                            <th class="text-white"> Name </th>
+                            <th class="text-white"> DateCreated</th>
+                            <th class="text-white"> Action</th>
                         </tr>
                     </thead>
                     @if (Model.Count() > 0 && Model != null)
                     {
-
+                        
                         <tbody>
+                            @{
+                                var noCount = 1;
+                            }
                             @foreach (var style in Model)
                             {
-                                var noCount = 1;
                                 <tr>
-                                    <td>@noCount</td>
-                                    <td>@style.Name </td>
-                                    <td>@style.DateCreated.ToString("D")</td>
+                                    <td class="text-white">@noCount</td>
+                                    <td class="text-white">@style.Name </td>
+                                    <td class="text-white">@style.DateCreated.ToString("D")</td>
                                     <td class="text-right">
                                         <div style="display: flex" class="my-2">
-                                            <a class="btn btn-outline-success mx-1" data-toggle="modal" data-target="#edit_wStyle" onclick="StyleToBeEdited('@style.Id')">
+                                            <a class="btn card-button mx-1" data-toggle="modal" data-target="#edit_wStyle" onclick="StyleToBeEdited('@style.Id')">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
-                                            <a class="btn btn-outline-success mx-1" data-toggle="modal" data-target="#delete_style" onclick="StyleToDelete('@style.Id')">
+                                            <a class="btn card-button mx-1" data-toggle="modal" data-target="#delete_style" onclick="StyleToDelete('@style.Id')">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </div>
@@ -85,22 +87,22 @@
 <!-- Add subject modal start -->
 <div class="modal fade" id="addStyle" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title"> <b> Add Writing Style </b> </h5>
+                <h5 class="modal-title text-white"> <b> Add Writing Style </b> </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-12 col-lg-12">
-                        <label class="col-form-label"> Name <span class="text-danger">*</span></label>
+                        <label class="col-form-label text-white"> Name <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" id="Wstyle_Name" required>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="submit_btn" onclick="addStyle()">Add Style </button>
+                <button type="button" class="btn card-button" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn card-button" id="submit_btn" onclick="addStyle()">Add Style </button>
             </div>
         </div>
     </div>
@@ -109,23 +111,23 @@
 <!-- Edit Subject Modal -->
 <div class="modal fade" id="edit_wStyle" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title"> <b> Edit Writing Style </b> </h5>
+                <h5 class="modal-title text-white"> <b> Edit Writing Style </b> </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-12 col-lg-6">
-                        <label class="col-form-label"> Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-12 col-lg-12">
+                        <label class="col-form-label text-white"> Name <span class="text-danger">*</span></label>
                         <input class="form-control" type="text" id="edit_wStyle_Name" required>
                         <input class="form-control" hidden type="text" id="wStyle_id">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="submit_btn" onclick="SaveEditedStyle()">Edit Style </button>
+                <button type="button" class="btn card-button" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn card-button" id="submit_btn" onclick="SaveEditedStyle()">Edit Style </button>
             </div>
         </div>
     </div>
@@ -135,21 +137,21 @@
 
 <div class="modal fade" id="delete_style" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title"> <b> Delete Writing Style </b> </h5>
+                <h5 class="modal-title text-white"> <b> Delete Writing Style </b> </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p class="text-center">Are you sure you want to delete?</p>
+                <p class="text-center text-white">Are you sure you want to delete?</p>
                 <div class="modal-btn delete-action">
                     <div class="row m-auto">
                         <input class="form-control" hidden type="text" id="wStyle_id">
                         <div class="col-6">
-                            <a class="btn btn-outline-success rounded-pill p-2 d-block" id="deleteSubject" onclick="DeleteStyle()">Delete</a>
+                            <a class="btn card-button rounded-pill p-2 d-block" id="deleteSubject" onclick="DeleteStyle()">Delete</a>
                         </div>
                         <div class="col-6">
-                            <a data-bs-dismiss="modal" class="btn btn-outline-success rounded-pill p-2 d-block">Cancel</a>
+                            <a data-bs-dismiss="modal" class="btn card-button rounded-pill p-2 d-block">Cancel</a>
                         </div>
                     </div>
                 </div>

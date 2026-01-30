@@ -34,6 +34,9 @@
     <link href="https://cdn.datatables.net/plug-ins/1.13.4/sorting/datetime-moment.js" />
     <link href="~/asset/vendor/simple-datatables/style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
+    
+    <!--  summernote -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
 
     <!-- sweetalert-->
     <link href="~/css/sweetalert2.css" rel="stylesheet" />
@@ -206,11 +209,10 @@
                         <span> Manage Genre</span>
                     </a>
                 </li>
-                <li class="nav-heading text-white pt-5">Projects</li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" asp-controller="Admin" asp-action="Audience">
-                        <i class="bi bi-card-list"></i>
-                        <span> Manage Target Audience </span>
+                        <i class="bi bi-people"></i>
+                        <span> Manage Audience </span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -219,19 +221,20 @@
                         <span> Create Writing Styles</span>
                     </a>
                 </li>
+                <li class="nav-heading text-white pt-5">Projects</li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" asp-controller="Book" asp-action="CreateNewBook">
-                        <i class="bi bi-plus"></i>
+                        <i class="bi bi-book"></i>
                         <span> New Book</span>
                     </a>
                 </li>
                 <li class="nav-heading text-white pt-5">Projects</li>
-                <li class="nav-item">
+                @* <li class="nav-item">
                     <a class="nav-link collapsed" asp-controller="Book" asp-action="CreateBookCover">
                         <i class="bi bi-card-list"></i>
                         <span> Cover Design </span>
                     </a>
-                </li>
+                </li> *@
                 <li class="nav-item">
                     <a class="nav-link collapsed" asp-controller="Book" asp-action="UserBooks">
                         <i class="bi bi-book"></i>
@@ -254,12 +257,12 @@
                     </a>
                 </li>
                 <li class="nav-heading text-white pt-5">Projects</li>
-                <li class="nav-item">
+                @* <li class="nav-item">
                     <a class="nav-link collapsed" asp-controller="Book" asp-action="CreateBookCover">
                         <i class="bi bi-card-list"></i>
                         <span> Cover Design </span>
                     </a>
-                </li>
+                </li> *@
                 <li class="nav-item">
                     <a class="nav-link collapsed" asp-controller="Book" asp-action="UserBooks">
                         <i class="bi bi-book"></i>
@@ -316,6 +319,38 @@
     <script src="~/asset/js/jquery.datatables.min.js"></script>
     <script src="~/asset/vendor/simple-datatables/simple-datatables.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"> </script>
+    
+    <!-- summernote-->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/1ypl05ko24cpwyuomjx0qh91bwsnujhsfjosgifctor6ctuz/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
+    <script>
+        tinymce.init({
+          selector: '#chapterEditor',
+          height: 680,
+          plugins: [
+            // Core editing features
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+            // Your account includes a free trial of TinyMCE premium features
+            // Try the most popular premium features until Feb 11, 2026:
+            'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'ai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+          ],
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          tinycomments_mode: 'embedded',
+          //tinycomments_author: 'Author name',
+          mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+          ],
+          setup: function (editor) {
+                editor.on('init', function () {
+                    loadChapter(0);
+                });
+            },
+          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+          uploadcare_public_key: 'd13eeb9091596c61bced',
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

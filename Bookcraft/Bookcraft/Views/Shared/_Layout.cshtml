@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@inject Logic.IHelpers.IUserHelper _userHelper
+
+@{
+    var user = _userHelper.FindByUserName(User?.Identity?.Name);
+    var userRole = _userHelper.GetUserRole(user?.Id);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -122,7 +129,21 @@
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-            <a class="btn-getstarted" asp-controller="Account" asp-action="Register">Get Started</a>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a class="btn-getstarted" asp-controller="Account" asp-action="Register">Get Started</a>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (userRole.ToLower().Contains("admin"))
+                {
+                    <a class="btn-getstarted" asp-controller="Admin" asp-action="Index">Dashboard</a>
+                }
+                @if (userRole.ToLower().Contains("user"))
+                {
+                    <a class="btn-getstarted" asp-controller="User" asp-action="Index">Dashboard</a>
+                }
+            }
         </div>
     </header>
 
